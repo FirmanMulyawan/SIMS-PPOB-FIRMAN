@@ -2,10 +2,10 @@ import 'package:get/get.dart';
 
 import '../../../components/config/app_route.dart';
 
-class LoginController extends GetxController {
+class RegisterController extends GetxController {
   bool isPassword = true;
 
-  LoginController();
+  RegisterController();
 
   @override
   void onInit() {
@@ -18,11 +18,7 @@ class LoginController extends GetxController {
     update();
   }
 
-  void toRegisterScreen() {
-    Get.toNamed(AppRoute.register);
-  }
-
-  void toDashboardScreen() {
-    Get.offNamedUntil(AppRoute.homeNavigationScreen, (route) => false);
+  void toLoginScreen() {
+    Get.toNamed(AppRoute.login);
   }
 }

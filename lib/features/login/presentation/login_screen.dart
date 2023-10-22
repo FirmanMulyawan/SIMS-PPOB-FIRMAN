@@ -109,8 +109,28 @@ class LoginScreen extends GetView<LoginController> {
                   height: 80,
                 ),
                 CustomButton(
-                  onTap: () {},
-                  name: 'MASUK',
+                  onTap: () => ctrl.toDashboardScreen(),
+                  name: 'Masuk',
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'belum punya akun? registrasi',
+                      style: MontserratFont.style12(textColor: AppStyle.black),
+                    ),
+                    InkWell(
+                      onTap: () => ctrl.toRegisterScreen(),
+                      child: Text(
+                        ' di sini',
+                        style:
+                            MontserratFont.style12(textColor: AppStyle.red500),
+                      ),
+                    ),
+                  ],
                 )
               ],
             ),

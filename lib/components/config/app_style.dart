@@ -122,6 +122,14 @@ class MontserratFont {
     return TextStyle(fontSize: 14, color: textColor, fontFamily: 'Montserrat');
   }
 
+  static TextStyle style14SemiBold({Color textColor = Colors.black}) {
+    return TextStyle(
+        fontSize: 14,
+        color: textColor,
+        fontWeight: FontWeight.w600,
+        fontFamily: 'Montserrat');
+  }
+
   static TextStyle style15({Color textColor = Colors.black}) {
     return TextStyle(fontSize: 15, color: textColor, fontFamily: 'Montserrat');
   }
