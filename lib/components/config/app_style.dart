@@ -158,6 +158,18 @@ class MontserratFont {
         fontFamily: 'Montserrat');
   }
 
+  static TextStyle style18({Color textColor = Colors.black}) {
+    return TextStyle(fontSize: 18, color: textColor, fontFamily: 'Montserrat');
+  }
+
+  static TextStyle style18SemiBold({Color textColor = Colors.black}) {
+    return TextStyle(
+        fontSize: 18,
+        color: textColor,
+        fontWeight: FontWeight.w600,
+        fontFamily: 'Montserrat');
+  }
+
   static TextStyle style18Bold({Color textColor = Colors.black}) {
     return TextStyle(
         fontSize: 18,
@@ -166,11 +178,27 @@ class MontserratFont {
         fontFamily: 'Montserrat');
   }
 
+  static TextStyle style24SemiBold({Color textColor = Colors.black}) {
+    return TextStyle(
+        fontSize: 24,
+        color: textColor,
+        fontWeight: FontWeight.w600,
+        fontFamily: 'Montserrat');
+  }
+
   static TextStyle style24Bold({Color textColor = Colors.black}) {
     return TextStyle(
         fontSize: 24,
         color: textColor,
         fontWeight: FontWeight.w700,
+        fontFamily: 'Montserrat');
+  }
+
+  static TextStyle style28SemiBold({Color textColor = Colors.black}) {
+    return TextStyle(
+        fontSize: 28,
+        color: textColor,
+        fontWeight: FontWeight.w600,
         fontFamily: 'Montserrat');
   }
 }

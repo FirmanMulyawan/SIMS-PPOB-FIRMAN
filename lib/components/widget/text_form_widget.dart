@@ -81,7 +81,7 @@ class WidgetTextFormField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
               color: enabledBorder ?? AppStyle.lightGrey, width: 1.1),
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(5.0),
         ),
         hintText: hintText,
         hintStyle: OpenSansFont.style14(textColor: AppStyle.lightGrey02),
@@ -89,12 +89,12 @@ class WidgetTextFormField extends StatelessWidget {
         focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(
               color: errorBorderColor ?? AppStyle.red500, width: 1.1),
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(5.0),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: BorderSide(
               color: errorBorderColor ?? AppStyle.red500, width: 1.1),
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(5.0),
         ),
         errorMaxLines: errorMaxLines,
         errorStyle: OpenSansFont.style12SemiBold(textColor: AppStyle.red),

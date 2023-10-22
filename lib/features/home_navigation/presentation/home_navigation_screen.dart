@@ -41,8 +41,8 @@ class HomeNavigationScreen extends GetView<HomeNavigationController> {
                   children: <Widget>[
                     Expanded(
                       child: WidgetButton(
-                        buttonName: 'Ball Club',
-                        nameAsset: AppConst.assetHomePage,
+                        buttonName: 'Home',
+                        nameAsset: AppConst.assetHome,
                         onTap: () => controller.onItemTapped(0, context),
                         styletext: _currentStyleText(
                             controller.selectedItem.value, 0)!,
@@ -52,13 +52,35 @@ class HomeNavigationScreen extends GetView<HomeNavigationController> {
                     ),
                     Expanded(
                       child: WidgetButton(
-                        buttonName: 'Akun',
-                        nameAsset: AppConst.assetUserDashboard,
+                        buttonName: 'Top UP',
+                        nameAsset: AppConst.assetMoney,
                         onTap: () => controller.onItemTapped(1, context),
                         styletext: _currentStyleText(
                             controller.selectedItem.value, 1)!,
                         colorIcon:
                             _currentColor(controller.selectedItem.value, 1)!,
+                      ),
+                    ),
+                    Expanded(
+                      child: WidgetButton(
+                        buttonName: 'Transaction',
+                        nameAsset: AppConst.assetCardATM,
+                        onTap: () => controller.onItemTapped(2, context),
+                        styletext: _currentStyleText(
+                            controller.selectedItem.value, 2)!,
+                        colorIcon:
+                            _currentColor(controller.selectedItem.value, 2)!,
+                      ),
+                    ),
+                    Expanded(
+                      child: WidgetButton(
+                        buttonName: 'Akun',
+                        nameAsset: AppConst.assetUserDashboard,
+                        onTap: () => controller.onItemTapped(3, context),
+                        styletext: _currentStyleText(
+                            controller.selectedItem.value, 3)!,
+                        colorIcon:
+                            _currentColor(controller.selectedItem.value, 3)!,
                       ),
                     ),
                   ],

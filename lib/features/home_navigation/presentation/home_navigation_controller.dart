@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import '../../../components/util/storage_util.dart';
 import '../../profile/presentation/profile_screen.dart';
 import '../../home/presentation/home_screen.dart';
+import '../../transaction/presentation/transaction_screen.dart';
+import '../../topup/presentation/topup_screen.dart';
 
 class HomeNavigationController extends GetxController {
   HomeNavigationController({
@@ -15,6 +17,8 @@ class HomeNavigationController extends GetxController {
 
   List<Widget> widgetList = <Widget>[
     const HomeScreen(),
+    const TopUpScreen(),
+    const TransactionScreen(),
     const ProfileScreen(),
   ];
 

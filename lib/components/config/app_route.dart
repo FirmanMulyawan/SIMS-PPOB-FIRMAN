@@ -11,6 +11,9 @@ import '../../features/register/binding/register_binding.dart';
 // home
 import '../../features/home_navigation/presentation/home_navigation_screen.dart';
 import '../../features/home_navigation/binding/home_navigation_binding.dart';
+// payment
+import '../../features/payment/presentation/payment_screen.dart';
+import '../../features/payment/binding/payment_binding.dart';
 
 class AppRoute {
   static const String defaultRoute = '/';
@@ -18,8 +21,8 @@ class AppRoute {
   static const String login = '/login';
   static const String register = '/register';
   static const String homeNavigationScreen = '/homeNavigationScreen';
+  static const String paymentScreen = '/paymentScreen';
 
-  //
   static List<GetPage> pages = [
     GetPage(
         name: defaultRoute,
@@ -31,10 +34,13 @@ class AppRoute {
         name: register,
         page: () => const RegisterScreen(),
         binding: RegisterBinding()),
-    //
     GetPage(
         name: homeNavigationScreen,
         page: () => const HomeNavigationScreen(),
         binding: HomeNavigationBinding()),
+    GetPage(
+        name: paymentScreen,
+        page: () => const PaymentScreen(),
+        binding: PaymentBinding()),
   ];
 }
