@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-import '../../../components/config/app_route.dart';
 import '../../../components/config/app_style.dart';
 import '../../../components/util/state.dart';
 import '../../../components/widget/loading_overlay/loading_screen.dart';
@@ -198,6 +197,6 @@ class RegisterController extends GetxController {
   }
 
   void toLoginScreen() {
-    Get.toNamed(AppRoute.login);
+    Get.back();
   }
 }

@@ -48,11 +48,10 @@ class LoginScreen extends GetView<LoginController> {
                   height: 50,
                 ),
                 WidgetTextFormField(
-                  enableInteractiveSelection: false,
+                  controller: ctrl.emailCtr,
+                  errorText: ctrl.errorEmail,
                   hintText: 'masukkan email anda',
                   textInputAction: TextInputAction.next,
-                  errorText: null,
-                  obscureText: true,
                   prefixIcon: SizedBox(
                     height: 30,
                     child: SvgPicture.asset(
@@ -69,10 +68,10 @@ class LoginScreen extends GetView<LoginController> {
                   height: 25,
                 ),
                 WidgetTextFormField(
-                  enableInteractiveSelection: false,
+                  controller: ctrl.passwordCtr,
+                  errorText: ctrl.errorPassword,
                   hintText: 'masukkan password anda',
                   textInputAction: TextInputAction.done,
-                  errorText: null,
                   obscureText: ctrl.isPassword,
                   prefixIcon: SizedBox(
                     height: 30,
@@ -109,7 +108,9 @@ class LoginScreen extends GetView<LoginController> {
                   height: 80,
                 ),
                 CustomButton(
-                  onTap: () => ctrl.toDashboardScreen(),
+                  onTap: ctrl.readySendToApi
+                      ? () => ctrl.onPressLogin(context: context)
+                      : () => ctrl.validation(),
                   name: 'Masuk',
                 ),
                 const SizedBox(
