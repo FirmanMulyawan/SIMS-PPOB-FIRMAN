@@ -10,7 +10,7 @@ class LinkImage {
 class AppConst {
   static String appName = "SIMS PPOB-Firman";
   static bool isDebuggable = true;
-  static String appUrl = "${dotenv.env['API_LINK']!}/take-home-test/";
+  static String appUrl = "${dotenv.env['API_LINK']!}/";
 
   static String apiVersion({String version = "v1"}) {
     return version;
