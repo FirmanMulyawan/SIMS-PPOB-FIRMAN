@@ -1,11 +1,47 @@
-abstract class HomePageState {}
+abstract class ProfileState {}
 
-class HomePageLoading extends HomePageState {}
+class ProfileLoading extends ProfileState {}
 
-class HomePageIdle extends HomePageState {}
+class ProfileIdle extends ProfileState {}
 
-class HomePageError extends HomePageState {}
+class ProfileError extends ProfileState {}
 
-class HomePageLoadSuccess extends HomePageState {}
+class ProfileSuccess extends ProfileState {}
 
-class HomePageEmpty extends HomePageState {}
+class ProfileEmpty extends ProfileState {}
+
+abstract class BalanceState {}
+
+class BalanceLoading extends BalanceState {}
+
+class BalanceIdle extends BalanceState {}
+
+class BalanceError extends BalanceState {}
+
+class BalanceSuccess extends BalanceState {}
+
+class BalanceEmpty extends BalanceState {}
+
+abstract class ServicesState {}
+
+class ServicesLoading extends ServicesState {}
+
+class ServicesIdle extends ServicesState {}
+
+class ServicesError extends ServicesState {}
+
+class ServicesSuccess extends ServicesState {}
+
+class ServicesEmpty extends ServicesState {}
+
+abstract class BannerState {}
+
+class BannerLoading extends BannerState {}
+
+class BannerIdle extends BannerState {}
+
+class BannerError extends BannerState {}
+
+class BannerSuccess extends BannerState {}
+
+class BannerEmpty extends BannerState {}

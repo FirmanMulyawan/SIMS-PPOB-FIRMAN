@@ -3,9 +3,12 @@ import '../config/app_style.dart';
 import '../config/app_const.dart';
 
 class TitleHome extends StatelessWidget {
+  final String imageLink;
+
   const TitleHome({
-    super.key,
-  });
+    Key? key,
+    required this.imageLink,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +37,10 @@ class TitleHome extends StatelessWidget {
               borderRadius: BorderRadius.circular(110),
               color: AppStyle.red,
               border: Border.all(color: AppStyle.lightGrey03, width: 1.1)),
-          child: const CircleAvatar(
+          child: CircleAvatar(
               radius: 100,
               backgroundColor: Colors.transparent,
-              backgroundImage: NetworkImage(
-                  'https://www.iconsdb.com/icons/preview/dark-gray/user-xxl.png')),
+              backgroundImage: NetworkImage(imageLink)),
         ),
       ],
     );

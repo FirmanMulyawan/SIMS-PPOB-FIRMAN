@@ -106,6 +106,14 @@ class AppStyle {
 }
 
 class MontserratFont {
+  static TextStyle style7SemiBold({Color textColor = Colors.black}) {
+    return TextStyle(
+        fontSize: 7.5,
+        color: textColor,
+        fontWeight: FontWeight.w700,
+        fontFamily: 'Montserrat');
+  }
+
   static TextStyle style12({Color textColor = Colors.black}) {
     return TextStyle(fontSize: 12, color: textColor, fontFamily: 'Montserrat');
   }
