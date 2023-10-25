@@ -1,18 +1,28 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 import '../../../components/config/app_route.dart';
+import '../../../components/config/app_style.dart';
 import '../../../components/util/state.dart';
 import '../../../components/util/storage_util.dart';
-import '../model/profile_response_model.dart';
-import '../profile_state.dart';
+import '../../../components/widget/loading_overlay/loading_screen.dart';
+
+import '../model/profile_update_request_model.dart';
+import '../model/profile_update_response_model.dart';
+import '../repository/profile_repository.dart';
 import '../../home/repository/home_repository.dart';
+
+import '../profile_state.dart';
 
 class ProfileController extends GetxController {
   TextEditingController nameCtr = TextEditingController();
   TextEditingController emailCtr = TextEditingController();
   TextEditingController firstNameCtr = TextEditingController();
   TextEditingController lastNameCtr = TextEditingController();
+  TextEditingController firstNameMasterCtr = TextEditingController();
+  TextEditingController lastNameMasterCtr = TextEditingController();
 
   String? errorEmail;
   String? errorFirstName;
@@ -22,13 +32,14 @@ class ProfileController extends GetxController {
   bool readySendToApi = false;
 
   final HomeRepository _repository;
+  final ProfileRepository _profileRepository;
   final StorageUtil _storageUtil;
 
   ProfileUserState profileUserState = ProfileUserIdle();
+  ProfileEditState profileEditState = ProfileEditIdle();
 
-  ProfileResponseModel? profile;
-
-  ProfileController(this._repository, this._storageUtil);
+  ProfileController(
+      this._repository, this._profileRepository, this._storageUtil);
 
   @override
   void onInit() {
@@ -82,10 +93,8 @@ class ProfileController extends GetxController {
   }
 
   _onReadyToApi() {
-    if (emailCtr.text.isEmpty ||
-        firstNameCtr.text.isEmpty ||
+    if (firstNameCtr.text.isEmpty ||
         lastNameCtr.text.isEmpty ||
-        errorEmail != null ||
         errorFirstName != null ||
         errorLastName != null) {
       readySendToApi = false;
@@ -95,7 +104,6 @@ class ProfileController extends GetxController {
   }
 
   void validation() {
-    _emailValidation();
     _firstNameValidation();
     _lastNameValidation();
   }
@@ -108,17 +116,56 @@ class ProfileController extends GetxController {
     super.onClose();
   }
 
+  onPressEditProfile({required BuildContext context}) async {
+    profileEditState = ProfileEditLoading();
+    LoadingScreen().show(context: context, text: 'Mohon Tunggu');
+    update();
+    _profileRepository.putEditProfile(
+      req: ProfileUpdateRequestModel(
+          firstName: firstNameCtr.text, lastName: lastNameCtr.text),
+      response: ResponseHandler(
+        onSuccess: (response) {
+          nameCtr.text =
+              '${response.data?.firstName} ${response.data?.lastName}';
+          emailCtr.text = response.data?.email ?? '';
+          firstNameCtr.text = response.data?.firstName ?? '';
+          lastNameCtr.text = response.data?.lastName ?? '';
+          firstNameMasterCtr.text = response.data?.firstName ?? '';
+          lastNameMasterCtr.text = response.data?.lastName ?? '';
+          LoadingScreen().hide();
+          profileEditState = ProfileEditSuccess();
+          readOnly = true;
+        },
+        onFailed: (e, text) {
+          LoadingScreen().hide();
+          final String errorString = e.response!.data!;
+          final error =
+              ProfileUpdateResponseModel.fromJson(jsonDecode(errorString));
+          Get.snackbar(
+            "Peringatan!",
+            '${error.message}',
+            snackPosition: SnackPosition.TOP,
+            colorText: AppStyle.white,
+            backgroundColor: AppStyle.red500,
+          );
+        },
+        onDone: () => update(),
+      ),
+    );
+  }
+
   void _onLoadProfile() {
     profileUserState = ProfileUserLoading();
     update();
     _repository.getDataProfile(
         response: ResponseHandler(
             onSuccess: (data) async {
-              profile = data;
               nameCtr.text = '${data.data?.firstName} ${data.data?.lastName}';
               emailCtr.text = data.data?.email ?? '';
               firstNameCtr.text = data.data?.firstName ?? '';
               lastNameCtr.text = data.data?.lastName ?? '';
+              firstNameMasterCtr.text = data.data?.firstName ?? '';
+              lastNameMasterCtr.text = data.data?.lastName ?? '';
 
               profileUserState = ProfileUserSuccess();
             },
@@ -129,6 +176,13 @@ class ProfileController extends GetxController {
   }
 
   void updateReadOnly(bool? value) {
+    readOnly = value ?? true;
+    update();
+  }
+
+  void cancelEditProfile(bool? value) {
+    firstNameCtr.text = firstNameMasterCtr.text;
+    lastNameCtr.text = lastNameMasterCtr.text;
     readOnly = value ?? true;
     update();
   }

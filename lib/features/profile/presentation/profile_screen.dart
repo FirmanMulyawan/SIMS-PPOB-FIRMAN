@@ -42,10 +42,8 @@ class ProfileScreen extends GetView<ProfileController> {
                       ),
                       WidgetTextFormField(
                         controller: ctrl.emailCtr,
-                        readOnly: ctrl.readOnly,
-                        focusedBorder: ctrl.readOnly
-                            ? AppStyle.lightGrey
-                            : const Color.fromRGBO(77, 79, 92, 1),
+                        readOnly: true,
+                        focusedBorder: AppStyle.lightGrey,
                         errorText: ctrl.errorEmail,
                         onFieldSubmitted: (_) =>
                             FocusScope.of(context).nextFocus(),
@@ -168,14 +166,15 @@ class ProfileScreen extends GetView<ProfileController> {
                         ),
                       ] else ...[
                         CustomButton(
-                          onTap: () {},
+                          onTap: () =>
+                              ctrl.onPressEditProfile(context: context),
                           name: 'Simpan',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         CustomButton(
-                          onTap: () => ctrl.updateReadOnly(true),
+                          onTap: () => ctrl.cancelEditProfile(true),
                           backgroundColor: AppStyle.white,
                           sideColor: AppStyle.appTheme,
                           name: 'Batalkan',
