@@ -49,7 +49,7 @@ class HomeScreen extends GetView<HomeController> {
                     CardSaldoHome(
                       controller: ctrl.saldo,
                       obscureText: ctrl.isObscureText,
-                      readOnly: false,
+                      readOnly: true,
                       onTap: () {
                         ctrl.isObscureText == true
                             ? ctrl.updateIsObscureText(false)
@@ -60,7 +60,9 @@ class HomeScreen extends GetView<HomeController> {
                           : AppConst.assetEyeVisibility,
                     ),
                   ] else if (ctrl.balanceState is BalanceLoading) ...[
-                    const BalanceShimmer()
+                    const BalanceShimmer(
+                      height: 180,
+                    )
                   ] else ...[
                     CardSaldoHome(
                       controller: ctrl.saldo,

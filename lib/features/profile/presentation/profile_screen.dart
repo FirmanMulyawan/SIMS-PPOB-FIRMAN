@@ -41,11 +41,16 @@ class ProfileScreen extends GetView<ProfileController> {
                         title: 'Email',
                       ),
                       WidgetTextFormField(
-                        enableInteractiveSelection: false,
+                        controller: ctrl.emailCtr,
+                        readOnly: ctrl.readOnly,
+                        focusedBorder: ctrl.readOnly
+                            ? AppStyle.lightGrey
+                            : const Color.fromRGBO(77, 79, 92, 1),
+                        errorText: ctrl.errorEmail,
+                        onFieldSubmitted: (_) =>
+                            FocusScope.of(context).nextFocus(),
                         hintText: 'masukkan email anda',
                         textInputAction: TextInputAction.next,
-                        errorText: null,
-                        obscureText: true,
                         prefixIcon: SizedBox(
                           height: 30,
                           child: SvgPicture.asset(
@@ -65,10 +70,14 @@ class ProfileScreen extends GetView<ProfileController> {
                         title: 'Nama Depan',
                       ),
                       WidgetTextFormField(
-                        enableInteractiveSelection: false,
+                        controller: ctrl.firstNameCtr,
+                        readOnly: ctrl.readOnly,
+                        focusedBorder: ctrl.readOnly
+                            ? AppStyle.lightGrey
+                            : AppStyle.blackCustom,
                         hintText: 'masukkan nama depan',
-                        textInputAction: TextInputAction.done,
-                        errorText: null,
+                        textInputAction: TextInputAction.next,
+                        errorText: ctrl.errorFirstName,
                         prefixIcon: SizedBox(
                           height: 30,
                           child: SvgPicture.asset(
@@ -88,10 +97,14 @@ class ProfileScreen extends GetView<ProfileController> {
                         title: 'Nama Belakang',
                       ),
                       WidgetTextFormField(
-                        enableInteractiveSelection: false,
+                        controller: ctrl.lastNameCtr,
+                        readOnly: ctrl.readOnly,
+                        focusedBorder: ctrl.readOnly
+                            ? AppStyle.lightGrey
+                            : AppStyle.blackCustom,
+                        errorText: ctrl.errorLastName,
                         hintText: 'masukkan nama belakang',
                         textInputAction: TextInputAction.done,
-                        errorText: null,
                         prefixIcon: SizedBox(
                           height: 30,
                           child: SvgPicture.asset(
@@ -107,20 +120,68 @@ class ProfileScreen extends GetView<ProfileController> {
                       const SizedBox(
                         height: 30,
                       ),
-                      CustomButton(
-                        onTap: () {},
-                        name: 'Simpan',
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      CustomButton(
-                        onTap: () {},
-                        backgroundColor: AppStyle.white,
-                        sideColor: AppStyle.appTheme,
-                        name: 'Batalkan',
-                        textColor: AppStyle.appTheme,
-                      ),
+                      if (ctrl.readOnly == true) ...[
+                        CustomButton(
+                          onTap: () => ctrl.updateReadOnly(false),
+                          backgroundColor: AppStyle.white,
+                          sideColor: AppStyle.appTheme,
+                          name: 'Edit Profile',
+                          textColor: AppStyle.appTheme,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        CustomButton(
+                          onTap: () => showDialog(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title:
+                                  const Text('Apakah anda yakin akan keluar?'),
+                              actionsPadding: const EdgeInsets.only(
+                                  left: 20, right: 20, bottom: 20),
+                              actionsAlignment: MainAxisAlignment.spaceBetween,
+                              actions: [
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: AppStyle.lightGrey02,
+                                    foregroundColor: AppStyle.white,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20),
+                                  ),
+                                  onPressed: () => Get.back(),
+                                  child: const Text('Batal'),
+                                ),
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: AppStyle.red500,
+                                    foregroundColor: AppStyle.white,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20),
+                                  ),
+                                  onPressed: () => ctrl.onLogoutClick(),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          name: 'Logout',
+                        ),
+                      ] else ...[
+                        CustomButton(
+                          onTap: () {},
+                          name: 'Simpan',
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        CustomButton(
+                          onTap: () => ctrl.updateReadOnly(true),
+                          backgroundColor: AppStyle.white,
+                          sideColor: AppStyle.appTheme,
+                          name: 'Batalkan',
+                          textColor: AppStyle.appTheme,
+                        ),
+                      ],
                     ],
                   ),
                   Positioned(
@@ -177,7 +238,7 @@ class ProfileScreen extends GetView<ProfileController> {
                             height: 10,
                           ),
                           Text(
-                            'Kristanto Wibowo',
+                            ctrl.nameCtr.text,
                             style: MontserratFont.style18Bold(
                                 textColor: AppStyle.black),
                           ),

@@ -20,6 +20,8 @@ class AppConst {
   static String assetsLogo = 'assets/images/Logo.png';
   static String assetsImageNF = 'assets/images/image_not_found.png';
   static String assetsListrik = 'assets/images/Listrik.png';
+  static String assetsprofile = 'assets/images/Profile.png';
+  static String assetsProfileDashboard = 'assets/images/ProfileDashboard.png';
 
   // ======== Icons svg
   static String assetPadlock = 'assets/icons/ic_padlock.svg';
